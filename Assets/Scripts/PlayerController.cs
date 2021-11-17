@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         float distanceToDestination = Vector3.Distance(transform.position, moveTo);
-        print(distanceToDestination);
         if (distanceToDestination > (Time.deltaTime * movementSpeed)) {
             transform.position += Vector3.Normalize(moveTo - transform.position) * movementSpeed * Time.deltaTime;
         } else {
