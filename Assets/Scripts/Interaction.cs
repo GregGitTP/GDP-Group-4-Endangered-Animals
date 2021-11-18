@@ -13,18 +13,18 @@ public class Interaction : MonoBehaviour
     private void Update(){
         if(!interacting){
             if(Input.GetKeyDown(KeyCode.F)){
-                Interact();
+                StartInteraction();
             }
         }
     }
 
     // Function to handle interaction event
-    private void Interact(){
+    private void StartInteraction(){
         interacting=true;
         GameObject interactee=FindClosesInteractable();
 
         if(interactee!=null){
-            /* Add code for the interaction event (dialogue or start minigame or start quest) */
+            /* call the function for that specific NPC to start the event */
             /* interacting boolean will be set back to false once the event has finished */
         }
     }
