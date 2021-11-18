@@ -29,7 +29,6 @@ public class NPC : MonoBehaviour
 
     IEnumerator Move(){
         for(;;){
-            Debug.Log(dir);
             if(dir==1){
                 transform.position+=Vector3.up*moveSpeed*Time.deltaTime;
                 dir=transform.position.y>maxY?3:1;

@@ -20,12 +20,14 @@ public class Interaction : MonoBehaviour
 
     // Function to handle interaction event
     private void StartInteraction(){
-        interacting=true;
         GameObject interactee=FindClosesInteractable();
 
         if(interactee!=null){
+            Debug.Log("You have interacted!");
             /* call the function for that specific NPC to start the event */
             /* interacting boolean will be set back to false once the event has finished */
+        }else{
+            Debug.Log("No interactables nearby!");
         }
     }
 
