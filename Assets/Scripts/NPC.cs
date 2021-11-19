@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NPC : MonoBehaviour
 {
+    public TMP_Text nameComponent;
+    public string name;
+    
     public float moveRange=5f;
     public float moveSpeed=1f;
 
@@ -18,6 +22,8 @@ public class NPC : MonoBehaviour
     private float delay;
 
     private void Start(){
+        nameComponent.text=name;
+
         maxX=transform.position.x+moveRange;
         minX=transform.position.x-moveRange;
         maxY=transform.position.y+moveRange;
