@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
         moveTo = transform.position;
     }
 
-    // Update is called once per frame
     void Update() {
         if (Input.GetButtonDown("Fire1")) {
             moveTo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,6 +20,15 @@ public class PlayerController : MonoBehaviour {
             transform.position += Vector3.Normalize(moveTo - transform.position) * movementSpeed * Time.deltaTime;
         } else {
             transform.position = moveTo;
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.GetComponent<Trash>() != null) {
+            GameManager.instance.collectedTrash[(int)other.GetComponent<Trash>().type]++;
+            Destroy(other.gameObject);
+
         }
     }
 }
