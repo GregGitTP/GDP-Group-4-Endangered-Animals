@@ -26,6 +26,7 @@ public class Interaction : MonoBehaviour {
 
         if (interactee != null) {
             Debug.Log("You have interacted!");
+            interactee.GetComponent<NPC>().interacting = true;
             interacting = true;
             if (interactee.GetComponent<NPCDialogue>().dialogue.Count == dialogueLine) { //If the dialogue has ended
                 dialogueLine = 0; //Reset the dialogue counter

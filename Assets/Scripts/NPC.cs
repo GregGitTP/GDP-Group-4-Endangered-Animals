@@ -7,7 +7,9 @@ public class NPC : MonoBehaviour
 {
     public TMP_Text nameComponent;
     public string name;
-    
+
+    public bool interacting = false;
+
     public float moveRange=5f;
     public float moveSpeed=1f;
 
@@ -35,23 +37,34 @@ public class NPC : MonoBehaviour
 
     IEnumerator Move(){
         for(;;){
-            if(dir==1){
-                transform.position+=Vector3.up*moveSpeed*Time.deltaTime;
-                dir=transform.position.y>maxY?3:1;
-            }else if(dir==2){
-                transform.position+=Vector3.right*moveSpeed*Time.deltaTime;
-                dir=transform.position.x>maxX?4:2;
-            }else if(dir==3){
-                transform.position+=Vector3.down*moveSpeed*Time.deltaTime;
-                dir=transform.position.y<minY?1:3;
-            }else if(dir==4){
-                transform.position+=Vector3.left*moveSpeed*Time.deltaTime;
-                dir=transform.position.x<minX?2:4;
-            }
-            distTravelled+=moveSpeed*Time.deltaTime;
-            if(distTravelled>=moveDist){
-                SetNewMove();
-                yield return new WaitForSeconds(delay);
+            if (!interacting)
+            {
+                if (dir == 1)
+                {
+                    transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+                    dir = transform.position.y > maxY ? 3 : 1;
+                }
+                else if (dir == 2)
+                {
+                    transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                    dir = transform.position.x > maxX ? 4 : 2;
+                }
+                else if (dir == 3)
+                {
+                    transform.position += Vector3.down * moveSpeed * Time.deltaTime;
+                    dir = transform.position.y < minY ? 1 : 3;
+                }
+                else if (dir == 4)
+                {
+                    transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+                    dir = transform.position.x < minX ? 2 : 4;
+                }
+                distTravelled += moveSpeed * Time.deltaTime;
+                if (distTravelled >= moveDist)
+                {
+                    SetNewMove();
+                    yield return new WaitForSeconds(delay);
+                }
             }
             yield return null;
         }
