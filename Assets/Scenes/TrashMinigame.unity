@@ -219,14 +219,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dd6687b1fe8484da1f49f8f682a9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTrash: 4
   wayPoints:
   - {fileID: 1399749123}
   - {fileID: 1806679566}
   - {fileID: 603703635}
   - {fileID: 1342710490}
   - {fileID: 1021916560}
+  trashAssets: []
   currentPosition: 2
-  detectSwipeOnlyAfterRelease: 0
   SWIPE_THRESHOLD: 20
 --- !u!1 &534653664
 GameObject:
@@ -616,7 +617,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.990566, g: 0.6494749, b: 0.6494749, a: 1}
+  m_Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -854,7 +855,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.7877358, g: 1, b: 0.9940692, a: 1}
+  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1148,7 +1149,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

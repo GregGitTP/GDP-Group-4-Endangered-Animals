@@ -617,8 +617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1069.0538, y: -0.87778}
-  m_SizeDelta: {x: 421.8925, y: 421.89}
+  m_AnchoredPosition: {x: -391.0191, y: 1.2984}
+  m_SizeDelta: {x: 161.9542, y: 161.9532}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397901950
 MonoBehaviour:
@@ -809,8 +809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -508.1761}
-  m_SizeDelta: {x: 0, y: -1016.3522}
+  m_AnchoredPosition: {x: -0.00045776367, y: -183.21979}
+  m_SizeDelta: {x: 0.00085449, y: -366.4481}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764227955
 MonoBehaviour:
@@ -979,7 +979,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702bcf1c3ffff2043976970854945c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  trashRemaining: 20
+  trashThrownCorrectly: 0
+  timeLeft: 60
 --- !u!1 &1068214850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,8 +1173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210.95, y: -16.7872}
-  m_SizeDelta: {x: 2138.1, y: 390.0767}
+  m_AnchoredPosition: {x: 80.98, y: 1.3001}
+  m_SizeDelta: {x: 782.04, y: 161.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195561733
 MonoBehaviour:
@@ -1221,8 +1223,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1652,9 +1654,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRange: 3
-  dialogueUI: {fileID: 0}
-  dialogueDisplay: {fileID: 0}
-  dialoguePortrait: {fileID: 0}
+  dialogueUI: {fileID: 1195561733}
+  dialogueDisplay: {fileID: 764227953}
+  dialoguePortrait: {fileID: 397901948}
   interacting: 0
 --- !u!70 &1266307230
 CapsuleCollider2D:
@@ -1776,7 +1778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702bcf1c3ffff2043976970854945c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  trashRemaining: 20
+  trashThrownCorrectly: 0
+  timeLeft: 60
 --- !u!212 &1640246875
 SpriteRenderer:
   m_ObjectHideFlags: 0
