@@ -27,19 +27,19 @@ public class Interaction : MonoBehaviour {
         if (interactee != null) {
             Debug.Log("You have interacted!");
             interacting = true;
-            if (interactee.GetComponent<NPCDialogue>().dialogue.Count == dialogueLine) {
-                dialogueLine = 0;
-                interacting = false;
-                dialogueDisplay.SetActive(false);
+            if (interactee.GetComponent<NPCDialogue>().dialogue.Count == dialogueLine) { //If the dialogue has ended
+                dialogueLine = 0; //Reset the dialogue counter
+                interacting = false; //Set interacting back to false
+                dialogueDisplay.SetActive(false); //Hide dialogue display
+                interactee.GetComponent<NPC>().enabled = true; //Allow NPC to move again
 
             } else {
-                StartCoroutine(StartDialogue(interactee.GetComponent<NPCDialogue>().dialogue[dialogueLine]));
-                dialogueLine++;
-                dialoguePortrait.GetComponent<Image>().sprite = interactee.GetComponent<NPCDialogue>().portraits[interactee.GetComponent<NPCDialogue>().currentMode];
-                dialogueDisplay.SetActive(true);
+                StartCoroutine(StartDialogue(interactee.GetComponent<NPCDialogue>().dialogue[dialogueLine])); //Display the dialogue character by chracter
+                dialogueLine++; //Increase to the next line
+                dialoguePortrait.GetComponent<Image>().sprite = interactee.GetComponent<NPCDialogue>().portraits[interactee.GetComponent<NPCDialogue>().currentMode]; //Set the portrait base on mode
+                dialogueDisplay.SetActive(true); //Show the dialogue UI display
+                interactee.GetComponent<NPC>().enabled = false; //Stop the NPC from moving away
             }
-            /* call the function for that specific NPC to start the event */
-            /* interacting boolean will be set back to false once the event has finished */
         } else {
             Debug.Log("No interactables nearby!");
         }

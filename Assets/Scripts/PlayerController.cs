@@ -30,11 +30,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    /*private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<Trash>() != null) {
             GameManager.instance.collectedTrash[(int) other.GetComponent<Trash>().type]++;
             Destroy(other.gameObject);
 
         }
-    }
+    }*/
 }
