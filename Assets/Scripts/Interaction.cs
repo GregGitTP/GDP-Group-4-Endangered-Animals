@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-//using TMPro;
+using UnityEngine.UI;
+
 
 public class Interaction : MonoBehaviour {
     // public variables
     public float interactionRange = 3f;
-
+    public TextMeshProUGUI dialogueUI;
+    public GameObject dialogueDisplay, dialoguePortrait;
+    public bool interacting = false;
     // private variables
-    private bool interacting = false;
-    //public TextMeshProUGUI dialogueUI;
-
+    private int dialogueLine = 0;
 
     private void Update() {
-        if (!interacting) {
-            if (Input.GetKeyDown(KeyCode.F)) {
-                StartInteraction();
-            }
+        if (Input.GetKeyDown(KeyCode.F)) {
+            StartInteraction();
         }
     }
 
@@ -26,6 +26,18 @@ public class Interaction : MonoBehaviour {
 
         if (interactee != null) {
             Debug.Log("You have interacted!");
+            interacting = true;
+            if (interactee.GetComponent<NPCDialogue>().dialogue.Count == dialogueLine) {
+                dialogueLine = 0;
+                interacting = false;
+                dialogueDisplay.SetActive(false);
+
+            } else {
+                StartCoroutine(StartDialogue(interactee.GetComponent<NPCDialogue>().dialogue[dialogueLine]));
+                dialogueLine++;
+                dialoguePortrait.GetComponent<Image>().sprite = interactee.GetComponent<NPCDialogue>().portraits[interactee.GetComponent<NPCDialogue>().currentMode];
+                dialogueDisplay.SetActive(true);
+            }
             /* call the function for that specific NPC to start the event */
             /* interacting boolean will be set back to false once the event has finished */
         } else {
@@ -50,5 +62,13 @@ public class Interaction : MonoBehaviour {
         }
 
         return closest;
+    }
+
+    IEnumerator StartDialogue(string dialogue) {
+        dialogueUI.text = "";
+        for (int j = 0; j < dialogue.Length; j++) {
+            dialogueUI.text += dialogue[j];
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
