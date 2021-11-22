@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public float movementSpeed = 5f;
+    public static PlayerController playerController;
     Vector3 moveTo;
     void Start() {
+        if (PlayerController.playerController != null) {
+            Destroy(gameObject);
+        }
+        playerController = this;
         moveTo = transform.position;
     }
 
@@ -16,17 +21,18 @@ public class PlayerController : MonoBehaviour {
         }
 
         float distanceToDestination = Vector3.Distance(transform.position, moveTo);
-        if (distanceToDestination > (Time.deltaTime * movementSpeed)) {
-            transform.position += Vector3.Normalize(moveTo - transform.position) * movementSpeed * Time.deltaTime;
-        } else {
-            transform.position = moveTo;
+        if (!GetComponent<Interaction>().interacting) {
+            if (distanceToDestination > (Time.deltaTime * movementSpeed)) {
+                transform.position += Vector3.Normalize(moveTo - transform.position) * movementSpeed * Time.deltaTime;
+            } else {
+                transform.position = moveTo;
+            }
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<Trash>() != null) {
-            GameManager.instance.collectedTrash[(int)other.GetComponent<Trash>().type]++;
+            GameManager.instance.collectedTrash[(int) other.GetComponent<Trash>().type]++;
             Destroy(other.gameObject);
 
         }
