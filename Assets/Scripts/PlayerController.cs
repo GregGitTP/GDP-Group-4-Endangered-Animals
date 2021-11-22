@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public static PlayerController playerController;
-    public Animator anim;
     public Camera mainCamera;
 
     public float movementSpeed = 5f;
 
+    Animator anim;
     Vector3 originalLocalScale;
     bool moving;
     float targetAngle = 0;
     Vector3 moveTo;
     Vector3 moveVector;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Start() {
         if (PlayerController.playerController != null) {

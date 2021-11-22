@@ -13,6 +13,9 @@ public class NPC : MonoBehaviour
     public float moveRange=5f;
     public float moveSpeed=1f;
 
+    private Animator anim;
+    private Vector3 originalLocalScale;
+
     private float maxX;
     private float minX;
     private float maxY;
@@ -23,7 +26,14 @@ public class NPC : MonoBehaviour
     private float dir;
     private float delay;
 
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Start(){
+        originalLocalScale = transform.localScale;
+
         nameComponent.text=name;
 
         maxX=transform.position.x+moveRange;
@@ -42,40 +52,90 @@ public class NPC : MonoBehaviour
                 if (dir == 1)
                 {
                     transform.position += Vector3.up * moveSpeed * Time.deltaTime;
-                    dir = transform.position.y > maxY ? 3 : 1;
+                    if (transform.position.y > maxY)
+                    {
+                        dir = 3;
+                        UpdateAnimation();
+                    }
                 }
                 else if (dir == 2)
                 {
                     transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-                    dir = transform.position.x > maxX ? 4 : 2;
+                    if (transform.position.x > maxX)
+                    {
+                        dir = 4;
+                        UpdateAnimation();
+                    }
                 }
                 else if (dir == 3)
                 {
                     transform.position += Vector3.down * moveSpeed * Time.deltaTime;
-                    dir = transform.position.y < minY ? 1 : 3;
+                    if (transform.position.y < minY)
+                    {
+                        dir = 1;
+                        UpdateAnimation();
+                    }
                 }
                 else if (dir == 4)
                 {
                     transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-                    dir = transform.position.x < minX ? 2 : 4;
+                    if (transform.position.x < minX)
+                    {
+                        dir = 2;
+                        UpdateAnimation();
+                    }
                 }
                 distTravelled += moveSpeed * Time.deltaTime;
                 if (distTravelled >= moveDist)
                 {
                     SetNewMove();
                     yield return new WaitForSeconds(delay);
+                    UpdateAnimation();
                 }
+            }
+            else
+            {
+                ResetAnimation();
             }
             yield return null;
         }
     }
 
     private void SetNewMove(){
-        distTravelled=0;
+        ResetAnimation();
+        distTravelled =0;
         moveDist=0;
         delay=0;
         dir=Random.Range(1,4);
         while(moveDist<1)moveDist=Mathf.Round(Random.value*10*10f)/10f;
         while(delay<1.5f)delay=Mathf.Round(Random.value*3*10f)/10f;
+    }
+
+    private void UpdateAnimation()
+    {
+        if (dir == 1)
+        {
+            return;
+        }
+        else if(dir==2)
+        {
+            anim.SetBool("side", true);
+            transform.localScale = new Vector3(originalLocalScale.x * -1, originalLocalScale.y, 0);
+        }
+        else if (dir == 3)
+        {
+            return;
+        }
+        else if (dir == 4)
+        {
+            anim.SetBool("side", true);
+            transform.localScale = originalLocalScale;
+        }
+    }
+
+    private void ResetAnimation()
+    {
+        transform.localScale = originalLocalScale;
+        anim.SetBool("side", false);
     }
 }
