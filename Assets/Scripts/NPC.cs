@@ -5,6 +5,7 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
+    public Transform nameTransform;
     public TMP_Text nameComponent;
     public string name;
 
@@ -15,6 +16,7 @@ public class NPC : MonoBehaviour
 
     private Animator anim;
     private Vector3 originalLocalScale;
+    private Vector3 originalNameLocalScale;
 
     private float maxX;
     private float minX;
@@ -33,6 +35,7 @@ public class NPC : MonoBehaviour
 
     private void Start(){
         originalLocalScale = transform.localScale;
+        originalNameLocalScale = nameTransform.localScale;
 
         nameComponent.text=name;
 
@@ -42,6 +45,7 @@ public class NPC : MonoBehaviour
         minY=transform.position.y-moveRange;
 
         SetNewMove();
+        UpdateAnimation();
         StartCoroutine(Move());
     }
 
@@ -113,29 +117,35 @@ public class NPC : MonoBehaviour
 
     private void UpdateAnimation()
     {
+        ResetAnimation();
         if (dir == 1)
         {
+            // npc walk up animation
             return;
         }
         else if(dir==2)
         {
             anim.SetBool("side", true);
             transform.localScale = new Vector3(originalLocalScale.x * -1, originalLocalScale.y, 0);
+            nameTransform.localScale = new Vector3(originalNameLocalScale.x * -1, originalNameLocalScale.y, 0);
         }
         else if (dir == 3)
         {
+            // npc walk up animation
             return;
         }
         else if (dir == 4)
         {
             anim.SetBool("side", true);
             transform.localScale = originalLocalScale;
+            nameTransform.localScale = originalNameLocalScale;
         }
     }
 
     private void ResetAnimation()
     {
         transform.localScale = originalLocalScale;
+        nameTransform.localScale = originalNameLocalScale;
         anim.SetBool("side", false);
     }
 }

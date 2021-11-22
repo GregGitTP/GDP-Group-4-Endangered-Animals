@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a3b8cd47b1aa64fa152ff56ca1f7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTransform: {fileID: 6347346372714624332}
   nameComponent: {fileID: 6347346372714624333}
   name: Name
   interacting: 0
