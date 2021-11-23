@@ -5,16 +5,16 @@ using UnityEngine;
 public class TrashPlayerController : MonoBehaviour {
     public enum TrashType { Paper, Plastic, Glass, Metal, GeneralWaste }
     public TrashType currentTrash = TrashType.GeneralWaste;
-
     public GameObject[] wayPoints;
     public Sprite[] trashAssets;
     public int currentPosition = 2;
     public float SWIPE_THRESHOLD = 20f;
     private Vector2 fingerDown;
     private Vector2 fingerUp;
-
+    private TrashMinigame trashMinigame;
     void Start() {
         newTrash();
+        trashMinigame = GameObject.FindGameObjectWithTag("GameController").GetComponent<TrashMinigame>();
     }
 
     // Update is called once per frame
@@ -42,7 +42,9 @@ public class TrashPlayerController : MonoBehaviour {
                 currentPosition++;
             }
         } else if (Input.GetKeyDown(KeyCode.S)) {
+            trashMinigame.ThrownTrash();
             if (currentPosition == (int) currentTrash) {
+                trashMinigame.winScore();
                 print("correct");
             } else {
                 print("WRONG");
