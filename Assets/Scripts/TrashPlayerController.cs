@@ -43,11 +43,10 @@ public class TrashPlayerController : MonoBehaviour {
             }
         } else if (Input.GetKeyDown(KeyCode.S)) {
             trashMinigame.ThrownTrash();
-            if (currentPosition == (int) currentTrash) {
+            if (currentPosition == (int)currentTrash) {
                 trashMinigame.winScore();
-                print("correct");
             } else {
-                print("WRONG");
+                trashMinigame.failsBeforeLose--;
             }
             newTrash();
         }
@@ -57,11 +56,11 @@ public class TrashPlayerController : MonoBehaviour {
 
     }
     private void newTrash() {
-        currentTrash = (TrashType) Random.Range(0, 5);
+        currentTrash = (TrashType)Random.Range(0, 5);
 
         //transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = trashAssets[(int) currentTrash]; //Enable this when asset is here
 
-        //FOR TESTING WITHOUT ART ASSET
+        //FOR TESTING WITHOUT ART ASSET//
         switch (currentTrash) {
             case TrashType.Paper:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
@@ -79,6 +78,7 @@ public class TrashPlayerController : MonoBehaviour {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
                 break;
         }
+        ////////////////////////////////////////////////////////////////////////////////
     }
     void checkSwipe() {
         //Check if Vertical swipe
@@ -122,22 +122,31 @@ public class TrashPlayerController : MonoBehaviour {
     }
 
     void SwipeDirection(int dir) {
-        switch (dir) {
-            case 1: //Left
-                if (currentPosition != 0) {
-                    currentPosition--;
-                }
-                break;
-            case 2: //Right
-                if (currentPosition != (wayPoints.Length - 1)) {
-                    currentPosition++;
-                }
-                break;
-            case 3: //Up
-                break;
-            case 4: //Down
-                break;
+        if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
+            switch (dir) {
+                case 1: //Left
+                    if (currentPosition != 0) {
+                        currentPosition--;
+                    }
+                    break;
+                case 2: //Right
+                    if (currentPosition != (wayPoints.Length - 1)) {
+                        currentPosition++;
+                    }
+                    break;
+                case 3: //Up
+                    break;
+                case 4: //Down
+                    trashMinigame.ThrownTrash();
+                    if (currentPosition == (int)currentTrash) {
+                        trashMinigame.winScore();
+                    } else {
+                        trashMinigame.failsBeforeLose--;
+                    }
+                    newTrash();
+                    break;
+            }
+            transform.position = wayPoints[currentPosition].transform.position;
         }
-        transform.position = wayPoints[currentPosition].transform.position;
     }
 }
