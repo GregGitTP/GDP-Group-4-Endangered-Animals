@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public Camera mainCamera;
 
     public float movementSpeed = 5f;
+    public bool interacting = false;
 
     Animator anim;
     Vector3 originalLocalScale;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetButtonDown("Fire1")) {
+        if (!interacting&&Input.GetButtonDown("Fire1")) {
             moveTo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moveTo.z = 0;
             moving = true;
