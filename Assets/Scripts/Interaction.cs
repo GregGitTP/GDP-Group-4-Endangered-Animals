@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Interaction : MonoBehaviour {
@@ -11,6 +12,7 @@ public class Interaction : MonoBehaviour {
     public TextMeshProUGUI dialogueUI;
     public GameObject dialogueDisplay, dialoguePortrait, dialogueName;
     public bool interacting = false;
+    public GameObject levelLoader;
     // private variables
     private int dialogueLine = 0;
     private int currentMode = 0;
@@ -70,7 +72,8 @@ public class Interaction : MonoBehaviour {
             yield return StartCoroutine(CheckForNextDialogue());
             yield return null;
         }
-        Debug.Log("Go to mini game!");
+        dialogueDisplay.SetActive(false);
+        StartCoroutine(levelLoader.GetComponent<LevelLoader>().LoadMinigame(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/TrashMinigame.unity")));
     }
 
     IEnumerator CheckForNextDialogue()

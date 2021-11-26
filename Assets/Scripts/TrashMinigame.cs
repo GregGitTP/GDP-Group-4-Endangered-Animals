@@ -9,15 +9,15 @@ public class TrashMinigame : MonoBehaviour {
     public TextMeshProUGUI scoreTimer;
 
     private void Update() {
-        if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
-            scoreTimer.gameObject.SetActive(true);
-            timeLeft -= Time.deltaTime;
-            scoreTimer.text = "Trash Remaining: " + trashRemaining + "\nTime Remaining: " + Mathf.FloorToInt(timeLeft) + "s";
+        // if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
+        //     scoreTimer.gameObject.SetActive(true);
+        //     timeLeft -= Time.deltaTime;
+        //     scoreTimer.text = "Trash Remaining: " + trashRemaining + "\nTime Remaining: " + Mathf.FloorToInt(timeLeft) + "s";
 
-            if (timeLeft < 0 && trashRemaining > 1) { //Ran out of time
-                MinigameManager.minigameManager.LoseGame();
-            }
-        }
+        //     if (timeLeft < 0 && trashRemaining > 1) { //Ran out of time
+        //         MinigameManager.minigameManager.LoseGame();
+        //     }
+        // }
     }
     public void winScore() { trashThrownCorrectly++; }
     public void ThrownTrash() {
