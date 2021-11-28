@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TrashPlayerController : MonoBehaviour {
     public enum TrashType { Paper, Plastic, Glass, Metal, GeneralWaste }
     public TrashType currentTrash = TrashType.GeneralWaste;
-    public GameObject[] wayPoints;
-    public Sprite[] trashAssets;
     public int currentPosition = 2;
     public float SWIPE_THRESHOLD = 20f;
+    public TextMeshProUGUI trashName;
+    public GameObject[] wayPoints;
+
+    [Space(10)]
+    public Sprite[] paper, plastic, glass, metal, generalWaste;
     private Vector2 fingerDown;
     private Vector2 fingerUp;
     private TrashMinigame trashMinigame;
@@ -32,7 +36,7 @@ public class TrashPlayerController : MonoBehaviour {
             }
         }
 
-        //FOR PC TESTING, DELETE AFTER USE
+        /*//FOR PC TESTING, DELETE AFTER USE
         if (Input.GetKeyDown(KeyCode.A)) {
             if (currentPosition != 0) {
                 currentPosition--;
@@ -50,35 +54,29 @@ public class TrashPlayerController : MonoBehaviour {
             }
             newTrash();
         }
-
-        transform.position = wayPoints[currentPosition].transform.position;
-        //////////////////////////////////////////////////////////////////
+        transform.position = wayPoints[currentPosition].transform.position;*/
 
     }
     private void newTrash() {
         currentTrash = (TrashType)Random.Range(0, 5);
-
-        //transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = trashAssets[(int) currentTrash]; //Enable this when asset is here
-
-        //FOR TESTING WITHOUT ART ASSET//
         switch (currentTrash) {
             case TrashType.Paper:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = paper[Random.Range(0, paper.Length)];
                 break;
             case TrashType.Plastic:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.gray;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = plastic[Random.Range(0, plastic.Length)];
                 break;
             case TrashType.Glass:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = glass[Random.Range(0, glass.Length)];
                 break;
             case TrashType.Metal:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = metal[Random.Range(0, metal.Length)];
                 break;
             case TrashType.GeneralWaste:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = generalWaste[Random.Range(0, generalWaste.Length)];
                 break;
         }
-        ////////////////////////////////////////////////////////////////////////////////
+        trashName.text = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name.Replace("sprite", "").Replace("_", " ");
     }
     void checkSwipe() {
         //Check if Vertical swipe

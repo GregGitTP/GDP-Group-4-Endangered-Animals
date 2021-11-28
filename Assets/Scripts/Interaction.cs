@@ -19,26 +19,36 @@ public class Interaction : MonoBehaviour {
     private bool dAnimating = false;
 
     private void Update() {
-        if (!interacting && Input.GetKeyDown(KeyCode.F))
-        {
+        if (!interacting && Input.GetKeyDown(KeyCode.F)) {
             StartInteraction();
+        }
+
+        if (Input.touchCount > 0) { //Mobile Control
+            foreach (Touch t in Input.touches) {
+                Vector2 touchLocation = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                if (Input.GetTouch(t.fingerId).phase == TouchPhase.Began) {
+                    Collider2D hit = Physics2D.OverlapPoint(touchLocation);
+                    if (hit != null && !interacting) {
+                        if (hit.CompareTag("InteractableNPC")) {
+                            StartInteraction();
+                        }
+                    }
+                }
+            }
         }
     }
 
     // Function to find the closes interactable NPC 
-    private GameObject FindClosesInteractable()
-    {
+    private GameObject FindClosesInteractable() {
         GameObject closest = null;
         float closestDist = interactionRange;
 
         GameObject[] NPCs = GameObject.FindGameObjectsWithTag("InteractableNPC");
 
-        foreach (GameObject NPC in NPCs)
-        {
+        foreach (GameObject NPC in NPCs) {
             float dist = Vector3.Distance(transform.position, NPC.transform.position);
 
-            if (dist < closestDist)
-            {
+            if (dist < closestDist) {
                 closest = NPC;
                 closestDist = dist;
             }
@@ -64,10 +74,8 @@ public class Interaction : MonoBehaviour {
         }
     }
 
-    IEnumerator Dialogue(GameObject interactee)
-    {
-        for (int i = 0; i < interactee.GetComponent<NPCDialogue>().dialogue.Count; i++)
-        {
+    IEnumerator Dialogue(GameObject interactee) {
+        for (int i = 0; i < interactee.GetComponent<NPCDialogue>().dialogue.Count; i++) {
             yield return StartCoroutine(DialogueAnimation(interactee.GetComponent<NPCDialogue>().dialogue[dialogueLine])); //Display the dialogue character by chracter
             yield return StartCoroutine(CheckForNextDialogue());
             yield return null;
@@ -76,12 +84,10 @@ public class Interaction : MonoBehaviour {
         StartCoroutine(levelLoader.GetComponent<LevelLoader>().LoadMinigame(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/TrashMinigame.unity")));
     }
 
-    IEnumerator CheckForNextDialogue()
-    {
-        for(; ; )
+    IEnumerator CheckForNextDialogue() {
+        for (; ; )
         {
-            if (Input.GetMouseButtonDown(0))
-            {
+            if (Input.GetMouseButtonDown(0)) {
                 dialogueLine++;
                 yield break;
             }
@@ -89,20 +95,15 @@ public class Interaction : MonoBehaviour {
         }
     }
 
-    IEnumerator CheckForSkipDialogue()
-    {
-        for(; ; )
+    IEnumerator CheckForSkipDialogue() {
+        for (; ; )
         {
-            if (dAnimating)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
+            if (dAnimating) {
+                if (Input.GetMouseButtonDown(0)) {
                     dAnimating = false;
                 }
                 yield return null;
-            }
-            else
-            {
+            } else {
                 yield break;
             }
         }
@@ -114,8 +115,7 @@ public class Interaction : MonoBehaviour {
         dialogueUI.text = "";
         for (int j = 0; j < dialogue.Length; j++) {
 
-            if (!dAnimating)
-            {
+            if (!dAnimating) {
                 dialogueUI.text = dialogue;
                 yield return null;
                 yield break;
