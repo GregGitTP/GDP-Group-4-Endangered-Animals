@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrashMinigame.unity
     guid: 08072970974a14d458197f59de40202b
+  - enabled: 1
+    path: Assets/Scenes/ShoppingMinigame.unity
+    guid: 44c39d1626103ad438c5b1429191f8b0
   m_configObjects: {}
