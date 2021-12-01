@@ -58,8 +58,8 @@ public class TrashPlayerController : MonoBehaviour {
 
     }
     private void newTrash() {
-        currentTrash = (TrashType)Random.Range(0, 5);
-        switch (currentTrash) {
+        currentTrash = (TrashType)Random.Range(0, 5); //Generate a new trash type
+        switch (currentTrash) { //Setting the sprite
             case TrashType.Paper:
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = paper[Random.Range(0, paper.Length)];
                 break;
@@ -76,7 +76,7 @@ public class TrashPlayerController : MonoBehaviour {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = generalWaste[Random.Range(0, generalWaste.Length)];
                 break;
         }
-        trashName.text = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name.Replace("sprite", "").Replace("_", " ");
+        trashName.text = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name.Replace("sprite", "").Replace("_", " "); //Using the sprite name to display the trash name
     }
     void checkSwipe() {
         //Check if Vertical swipe
@@ -137,14 +137,32 @@ public class TrashPlayerController : MonoBehaviour {
                 case 4: //Down
                     trashMinigame.ThrownTrash();
                     if (currentPosition == (int)currentTrash) {
-                        trashMinigame.winScore();
+                        StartCoroutine(PlayerFeedback(true));
+                        //trashMinigame.winScore();
                     } else {
-                        trashMinigame.failsBeforeLose--;
+                        StartCoroutine(PlayerFeedback(false));
+                        //trashMinigame.failsBeforeLose--;
                     }
                     newTrash();
                     break;
             }
             transform.position = wayPoints[currentPosition].transform.position;
         }
+    }
+
+    IEnumerator PlayerFeedback(bool isCorrect) {
+        GameObject feedBackObj = wayPoints[currentPosition].transform.GetChild(0).gameObject;
+        ParticleSystem.MainModule settings = feedBackObj.GetComponent<ParticleSystem>().main;
+
+        if (isCorrect) {
+            feedBackObj.GetComponent<SpriteRenderer>().color = new Color(100f / 255f, 200f / 255f, 100f / 255f, 125f / 255f);
+            settings.startColor = new ParticleSystem.MinMaxGradient(new Color(100f / 255f, 200f / 255f, 100f / 255f));
+        } else {
+            feedBackObj.GetComponent<SpriteRenderer>().color = new Color(200f / 255f, 100f / 255f, 100f / 255f, 125f / 255f);
+            settings.startColor = new ParticleSystem.MinMaxGradient(new Color(200f / 255f, 100f / 255f, 100f / 255f));
+        }
+        feedBackObj.GetComponent<ParticleSystem>().Play();
+        yield return new WaitForSecondsRealtime(1);
+        feedBackObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
 }
