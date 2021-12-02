@@ -4,31 +4,33 @@ using TMPro;
 using UnityEngine;
 
 public class TrashMinigame : MonoBehaviour {
-    public int trashRemaining = 20, trashThrownCorrectly = 0, failsBeforeLose = 3;
-    public float timeLeft = 60;
     public TextMeshProUGUI scoreTimer;
 
+    private int score = 0;
+    private float timeLeft = 60;
+
     private void Update() {
-        // if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
-        //     scoreTimer.gameObject.SetActive(true);
-        //     timeLeft -= Time.deltaTime;
-        //     scoreTimer.text = "Trash Remaining: " + trashRemaining + "\nTime Remaining: " + Mathf.FloorToInt(timeLeft) + "s";
+        if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
+            scoreTimer.gameObject.SetActive(true);
+            timeLeft -= Time.deltaTime;
+            scoreTimer.text = "Score: " + score + "\nTime Remaining: " + Mathf.FloorToInt(timeLeft) + "s";
             
-        //     if (timeLeft < 0 && trashRemaining > 1) { //Ran out of time
-        //         MinigameManager.minigameManager.LoseGame();
-        //     }
-        // }
-    }
-    public void winScore() { trashThrownCorrectly++; }
-    public void ThrownTrash() {
-        trashRemaining--;
-        if (failsBeforeLose == 0) {
-            MinigameManager.minigameManager.LoseGame();
-        }
-        if (trashRemaining == 0) {
-            if (trashThrownCorrectly == 20) {
-                MinigameManager.minigameManager.WinGame();
+            if (timeLeft < 0) { //Ran out of time
+                MinigameManager.minigameManager.EndGame();
             }
         }
     }
+
+    public void Reset(){
+        score = 0;
+        timeLeft = 60;
+    }
+
+    public void ScoreNormal(){score+=100;}
+
+    public void ScoreWashed(){score+=150;}
+
+    public void ScoreWrong(){score-=100;}
+    
+    public void WashWrong(){score-=50;}
 }

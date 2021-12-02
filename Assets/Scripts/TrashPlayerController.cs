@@ -4,83 +4,54 @@ using UnityEngine;
 using TMPro;
 
 public class TrashPlayerController : MonoBehaviour {
-    public enum TrashType { Paper, Plastic, Glass, Metal, GeneralWaste }
-    public TrashType currentTrash = TrashType.GeneralWaste;
-    public int currentPosition = 2;
-    public float SWIPE_THRESHOLD = 20f;
     public TextMeshProUGUI trashName;
     public GameObject[] wayPoints;
+    public SpriteRenderer sink;
 
-    [Space(10)]
-    public Sprite[] paper, plastic, glass, metal, generalWaste;
+    public int currentPosition = 2;
+    public float SWIPE_THRESHOLD = 20f;
+
+    private TrashMinigame trashMinigame;
+    private Trash trash;
+
     private Vector2 fingerDown;
     private Vector2 fingerUp;
-    private TrashMinigame trashMinigame;
+    private bool washing = false;
+    private bool lockWashing = false;
+
     void Start() {
-        newTrash();
         trashMinigame = GameObject.FindGameObjectWithTag("GameController").GetComponent<TrashMinigame>();
+        trash = GetComponent<Trash>();
+        
+        trashMinigame.Reset();
     }
 
-    // Update is called once per frame
     void Update() {
-
-        foreach (Touch touch in Input.touches) {
-            if (touch.phase == TouchPhase.Began) {
-                fingerUp = touch.position;
-                fingerDown = touch.position;
-            }
-            //Detects swipe after finger is released
-            if (touch.phase == TouchPhase.Ended) {
-                fingerDown = touch.position;
-                checkSwipe();
+        if(!washing){
+            foreach (Touch touch in Input.touches) {
+                if (touch.phase == TouchPhase.Began) {
+                    fingerUp = touch.position;
+                    fingerDown = touch.position;
+                }
+                //Detects swipe after finger is released
+                if (touch.phase == TouchPhase.Ended) {
+                    fingerDown = touch.position;
+                    checkSwipe();
+                }
             }
         }
 
-        /*//FOR PC TESTING, DELETE AFTER USE
-        if (Input.GetKeyDown(KeyCode.A)) {
-            if (currentPosition != 0) {
-                currentPosition--;
-            }
-        } else if (Input.GetKeyDown(KeyCode.D)) {
-            if (currentPosition != (wayPoints.Length - 1)) {
-                currentPosition++;
-            }
-        } else if (Input.GetKeyDown(KeyCode.S)) {
-            trashMinigame.ThrownTrash();
-            if (currentPosition == (int)currentTrash) {
-                trashMinigame.winScore();
-            } else {
-                trashMinigame.failsBeforeLose--;
-            }
-            newTrash();
-        }
-        transform.position = wayPoints[currentPosition].transform.position;*/
-
+        //PCControls();
     }
-    private void newTrash() {
-        currentTrash = (TrashType)Random.Range(0, 5); //Generate a new trash type
-        switch (currentTrash) { //Setting the sprite
-            case TrashType.Paper:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = paper[Random.Range(0, paper.Length)];
-                break;
-            case TrashType.Plastic:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = plastic[Random.Range(0, plastic.Length)];
-                break;
-            case TrashType.Glass:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = glass[Random.Range(0, glass.Length)];
-                break;
-            case TrashType.Metal:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = metal[Random.Range(0, metal.Length)];
-                break;
-            case TrashType.GeneralWaste:
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = generalWaste[Random.Range(0, generalWaste.Length)];
-                break;
-        }
+
+    public void SetNewTrash() {
+        trash.NewTrash();
         trashName.text = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name.Replace("sprite", "").Replace("_", " "); //Using the sprite name to display the trash name
     }
+
     void checkSwipe() {
         //Check if Vertical swipe
-        if (verticalMove() > SWIPE_THRESHOLD && verticalMove() > horizontalValMove()) {
+        if (VerticalMove() > SWIPE_THRESHOLD && VerticalMove() > HorizontalValMove()) {
             //Debug.Log("Vertical");
             if (fingerDown.y - fingerUp.y > 0) //up swipe
             {
@@ -93,7 +64,7 @@ public class TrashPlayerController : MonoBehaviour {
         }
 
         //Check if Horizontal swipe
-        else if (horizontalValMove() > SWIPE_THRESHOLD && horizontalValMove() > verticalMove()) {
+        else if (HorizontalValMove() > SWIPE_THRESHOLD && HorizontalValMove() > VerticalMove()) {
             //Debug.Log("Horizontal");
             if (fingerDown.x - fingerUp.x > 0) //Right swipe
             {
@@ -111,13 +82,9 @@ public class TrashPlayerController : MonoBehaviour {
         }
     }
 
-    float verticalMove() {
-        return Mathf.Abs(fingerDown.y - fingerUp.y);
-    }
-
-    float horizontalValMove() {
-        return Mathf.Abs(fingerDown.x - fingerUp.x);
-    }
+    float VerticalMove() {return Mathf.Abs(fingerDown.y - fingerUp.y);}
+    
+    float HorizontalValMove() {return Mathf.Abs(fingerDown.x - fingerUp.x);}
 
     void SwipeDirection(int dir) {
         if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
@@ -133,21 +100,48 @@ public class TrashPlayerController : MonoBehaviour {
                     }
                     break;
                 case 3: //Up
+                    if(!lockWashing) StartCoroutine(StartWashing());
                     break;
                 case 4: //Down
-                    trashMinigame.ThrownTrash();
-                    if (currentPosition == (int)currentTrash) {
+                    if(trash.IsWashed() && currentPosition == trash.GetTypeIndex()){
+                        trashMinigame.ScoreWashed();
                         StartCoroutine(PlayerFeedback(true));
-                        //trashMinigame.winScore();
-                    } else {
+                    }else if(currentPosition == trash.GetTypeIndex()){
+                        trashMinigame.ScoreNormal();
+                        StartCoroutine(PlayerFeedback(true));
+                    }else if(currentPosition == 4 && trash.GetTypeIndex() == 5){
+                        trashMinigame.ScoreNormal();
+                        StartCoroutine(PlayerFeedback(true));
+                    }else{
+                        trashMinigame.ScoreWrong();
                         StartCoroutine(PlayerFeedback(false));
-                        //trashMinigame.failsBeforeLose--;
                     }
-                    newTrash();
+                    SetNewTrash();
                     break;
             }
             transform.position = wayPoints[currentPosition].transform.position;
         }
+    }
+
+    IEnumerator StartWashing(){
+        if(!trash.IsWashable()){
+            trashMinigame.WashWrong();
+            StartCoroutine(WashingCooldown());
+            SetNewTrash();
+            yield break;
+        }
+
+        washing = true;
+        yield return StartCoroutine(trash.Wash());
+        washing = false;
+    }
+
+    IEnumerator WashingCooldown(){
+        lockWashing = true;
+        sink.sprite = Resources.Load<Sprite>("TrashMinigame/Sink_Sprites/sink_off");
+        yield return new WaitForSeconds(5);
+        sink.sprite = Resources.Load<Sprite>("TrashMinigame/Sink_Sprites/sink_on");
+        lockWashing = false;
     }
 
     IEnumerator PlayerFeedback(bool isCorrect) {
@@ -164,5 +158,28 @@ public class TrashPlayerController : MonoBehaviour {
         feedBackObj.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSecondsRealtime(1);
         feedBackObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+    }
+
+
+    // FOR PC TESTING
+    private void PCControls(){
+        // if (Input.GetKeyDown(KeyCode.A)) {
+        //     if (currentPosition != 0) {
+        //         currentPosition--;
+        //     }
+        // } else if (Input.GetKeyDown(KeyCode.D)) {
+        //     if (currentPosition != (wayPoints.Length - 1)) {
+        //         currentPosition++;
+        //     }
+        // } else if (Input.GetKeyDown(KeyCode.S)) {
+        //     trashMinigame.ThrownTrash();
+        //     if (currentPosition == (int)currentTrash) {
+        //         trashMinigame.winScore();
+        //     } else {
+        //         trashMinigame.failsBeforeLose--;
+        //     }
+        //     newTrash();
+        // }
+        // transform.position = wayPoints[currentPosition].transform.position;
     }
 }
