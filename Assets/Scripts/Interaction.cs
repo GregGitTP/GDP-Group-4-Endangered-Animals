@@ -13,6 +13,7 @@ public class Interaction : MonoBehaviour {
     public GameObject dialogueDisplay, dialoguePortrait, dialogueName;
     public bool interacting = false;
     public GameObject levelLoader;
+
     // private variables
     private int dialogueLine = 0;
     private int currentMode = 0;
@@ -24,14 +25,12 @@ public class Interaction : MonoBehaviour {
         }
 
         if (Input.touchCount > 0) { //Mobile Control
-            foreach (Touch t in Input.touches) {
-                Vector2 touchLocation = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-                if (Input.GetTouch(t.fingerId).phase == TouchPhase.Began) {
-                    Collider2D hit = Physics2D.OverlapPoint(touchLocation);
-                    if (hit != null && !interacting) {
-                        if (hit.CompareTag("InteractableNPC")) {
-                            StartInteraction();
-                        }
+            if (Input.GetTouch(0).phase == TouchPhase.Began) {
+                Collider2D hit = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position));
+                if (hit != null && !interacting) {
+                    if (hit.CompareTag("InteractableNPC")) {
+                        GetComponent<PlayerController>().moveTo = transform.position;
+                        StartInteraction();
                     }
                 }
             }
@@ -75,6 +74,7 @@ public class Interaction : MonoBehaviour {
     }
 
     IEnumerator Dialogue(GameObject interactee) {
+        yield return new WaitForSeconds(.5f);
         for (int i = 0; i < interactee.GetComponent<NPCDialogue>().dialogue.Count; i++) {
             yield return StartCoroutine(DialogueAnimation(interactee.GetComponent<NPCDialogue>().dialogue[dialogueLine])); //Display the dialogue character by chracter
             yield return StartCoroutine(CheckForNextDialogue());

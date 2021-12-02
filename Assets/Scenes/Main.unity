@@ -737,8 +737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a test dialogue that I wrote in place of our actual dialogue and
-    to test how the text would scale with the length of the sentence.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8e487f5afa859541a804cfa646cc020, type: 2}
   m_sharedMaterial: {fileID: -2261080752935162263, guid: b8e487f5afa859541a804cfa646cc020, type: 2}
@@ -1049,6 +1048,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   movementSpeed: 5
   interacting: 0
+  moveTo: {x: 0, y: 0, z: 0}
 --- !u!114 &1266307229
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour {
 
     public float movementSpeed = 5f;
     public bool interacting = false;
+    public Vector3 moveTo;
 
     Animator anim;
     Vector3 originalLocalScale;
     bool moving;
     float targetAngle = 0;
-    Vector3 moveTo;
     Vector3 moveVector;
 
     void Awake()
@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (!interacting&&Input.GetButtonDown("Fire1")) {
-            moveTo = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!interacting&&Input.touchCount > 0) {
+            moveTo = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
             moveTo.z = 0;
             moving = true;
             ResetAnimations();
