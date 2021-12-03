@@ -110,7 +110,7 @@ public class TrashPlayerController : MonoBehaviour {
                         trashMinigame.ScoreNormal();
                         StartCoroutine(PlayerFeedback(true));
                     }else if(currentPosition == 4 && trash.GetTypeIndex() == 5){
-                        trashMinigame.ScoreNormal();
+                        trashMinigame.ScoreNotWashed();
                         StartCoroutine(PlayerFeedback(true));
                     }else{
                         trashMinigame.ScoreWrong();

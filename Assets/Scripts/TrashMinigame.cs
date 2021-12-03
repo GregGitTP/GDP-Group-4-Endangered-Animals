@@ -90,6 +90,10 @@ public class TrashMinigame : MonoBehaviour {
         score+=150;
     }
 
+    public void ScoreNotWashed(){
+        score += 50;
+    }
+
     public void ScoreWrong(){
         score-=100;
         if(score<0) score = 0;

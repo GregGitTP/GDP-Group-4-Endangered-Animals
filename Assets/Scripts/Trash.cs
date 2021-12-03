@@ -59,7 +59,7 @@ public class Trash : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         
-        spriteName = spriteName.Replace("used_","");
+        spriteName = spriteName.Replace("dirty_","clean_");
 
         for(int a = 0; a < spriteArrays.Length; a++){
             for(int b = 0; b < spriteArrays[a].Length; b++){
@@ -72,7 +72,7 @@ public class Trash : MonoBehaviour
         sinkTrash.sprite = null;
         playerTrash.sprite = Resources.Load<Sprite>("TrashMinigame/Trash_Sprites/" + spriteName);
 
-        trashName.text = "washed " + spriteName.Replace("sprite","").Replace("_"," ");
+        trashName.text = "washed " + spriteName.Replace("clean_","").Replace("sprite","").Replace("_"," ");
 
         washStatus = WashStatus.Washed;
     }
