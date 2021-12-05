@@ -1355,8 +1355,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: []
+  sadDialogue: []
+  neutralDialogue: []
+  happyDialogue: []
   portraits: []
   currentMode: 1
+  npcId: 0
 --- !u!114 &1890531101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,11 +1607,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: currentMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: dialogue.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: portraits.Array.size
@@ -1634,6 +1638,10 @@ PrefabInstance:
         dialogue and to test how the text would scale with the length of the sentence.
       objectReference: {fileID: 0}
     - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: sadDialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: portraits.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: 7f9db1dab8a4b1d4da9cf7dbaf4ff603, type: 3}
@@ -1645,6 +1653,55 @@ PrefabInstance:
       propertyPath: portraits.Array.data[2]
       value: 
       objectReference: {fileID: 21300000, guid: 9d2b5fbebef132b4a97265afd5afbebc, type: 3}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: happyDialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: sadDialogue.Array.data[0]
+      value: There are still trash everywhere and in the wrong bins as well!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: sadDialogue.Array.data[1]
+      value: I am starting to have some doubts about you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: sadDialogue.Array.data[2]
+      value: Please try your best next time or my kind might disappear forever ;(
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: happyDialogue.Array.data[0]
+      value: Wow! you did so well!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: happyDialogue.Array.data[1]
+      value: but there are many more trash to go!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: happyDialogue.Array.data[2]
+      value: Please continue to keep up the good work!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.data[0]
+      value: Oh no! Our homes have been polluted! Look around, there is so much trash
+        everywhere!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.data[1]
+      value: Please help us by recycling the trash into the appropriate bins!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.data[2]
+      value: Remember, some trash requires washing before recycling!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.data[3]
+      value: Good luck and thanks for trying to make a difference
+      objectReference: {fileID: 0}
     - target: {fileID: 5786510648385337633, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: name
       value: Bob

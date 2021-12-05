@@ -7,6 +7,7 @@ public class TrashPlayerController : MonoBehaviour {
     public TextMeshProUGUI trashName;
     public GameObject[] wayPoints;
     public SpriteRenderer sink;
+    public AudioClip[] soundEffects;
 
     public int currentPosition = 2;
     public float SWIPE_THRESHOLD = 20f;
@@ -92,11 +93,13 @@ public class TrashPlayerController : MonoBehaviour {
                 case 1: //Left
                     if (currentPosition != 0) {
                         currentPosition--;
+                        GetComponent<AudioSource>().PlayOneShot(soundEffects[0]);
                     }
                     break;
                 case 2: //Right
                     if (currentPosition != (wayPoints.Length - 1)) {
                         currentPosition++;
+                        GetComponent<AudioSource>().PlayOneShot(soundEffects[0]);
                     }
                     break;
                 case 3: //Up
@@ -125,12 +128,13 @@ public class TrashPlayerController : MonoBehaviour {
 
     IEnumerator StartWashing(){
         if(!trash.IsWashable()){
+            GetComponent<AudioSource>().PlayOneShot(soundEffects[2]);
             trashMinigame.WashWrong();
             StartCoroutine(WashingCooldown());
             SetNewTrash();
             yield break;
         }
-
+        GetComponent<AudioSource>().PlayOneShot(soundEffects[1]);
         washing = true;
         yield return StartCoroutine(trash.Wash());
         washing = false;
@@ -149,9 +153,11 @@ public class TrashPlayerController : MonoBehaviour {
         ParticleSystem.MainModule settings = feedBackObj.GetComponent<ParticleSystem>().main;
 
         if (isCorrect) {
+            GetComponent<AudioSource>().PlayOneShot(soundEffects[3]);
             feedBackObj.GetComponent<SpriteRenderer>().color = new Color(100f / 255f, 200f / 255f, 100f / 255f, 125f / 255f);
             settings.startColor = new ParticleSystem.MinMaxGradient(new Color(100f / 255f, 200f / 255f, 100f / 255f));
         } else {
+            GetComponent<AudioSource>().PlayOneShot(soundEffects[4]);
             feedBackObj.GetComponent<SpriteRenderer>().color = new Color(200f / 255f, 100f / 255f, 100f / 255f, 125f / 255f);
             settings.startColor = new ParticleSystem.MinMaxGradient(new Color(200f / 255f, 100f / 255f, 100f / 255f));
         }

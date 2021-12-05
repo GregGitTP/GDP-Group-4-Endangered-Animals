@@ -36,16 +36,16 @@ public class MinigameManager : MonoBehaviour {
         }
     }
 
-    IEnumerator PulseStart(){
+    IEnumerator PulseStart() {
         startTxt.text = "Tap to start";
-        for(;;){
-            while(startTxt.fontSize < 40){
-                startTxt.fontSize+=.01f;
+        for (; ; ) {
+            while (startTxt.fontSize < 40) {
+                startTxt.fontSize += .01f;
                 yield return null;
             }
             yield return new WaitForSeconds(.2f);
-            while(startTxt.fontSize > 35){
-                startTxt.fontSize-=.01f;
+            while (startTxt.fontSize > 35) {
+                startTxt.fontSize -= .01f;
                 yield return null;
             }
             yield return new WaitForSeconds(.2f);
@@ -53,7 +53,7 @@ public class MinigameManager : MonoBehaviour {
     }
 
     IEnumerator StartMiniGame() {
-        
+
         countDown.SetActive(true);
         for (int i = 3; i > 0; i--) {
             countDown.GetComponent<TextMeshProUGUI>().text = i.ToString();
@@ -64,7 +64,14 @@ public class MinigameManager : MonoBehaviour {
         trashPlayerController.SetNewTrash();
     }
 
-    public void SetGameStateEnd(){
+    public void SetGameStateEnd(bool isWin) {
         currentMinigameState = MinigameState.EndGame;
+        if (isWin) {
+            PlayerPrefs.SetInt("moodOf" + npcId, 2);
+        } else {
+            if (PlayerPrefs.GetInt("moodOf" + npcId) != 2) {
+                PlayerPrefs.SetInt("moodOf" + npcId, 0);
+            }
+        }
     }
 }
