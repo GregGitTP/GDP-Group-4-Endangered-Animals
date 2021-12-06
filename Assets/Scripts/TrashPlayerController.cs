@@ -35,9 +35,13 @@ public class TrashPlayerController : MonoBehaviour {
                     fingerDown = touch.position;
                 }
                 //Detects swipe after finger is released
-                if (touch.phase == TouchPhase.Ended) {
+                else if (touch.phase == TouchPhase.Ended) {
                     fingerDown = touch.position;
                     checkSwipe();
+                }
+
+                else if(touch.tapCount == 2){
+                    if(!lockWashing) StartCoroutine(StartWashing());
                 }
             }
         }
@@ -103,7 +107,7 @@ public class TrashPlayerController : MonoBehaviour {
                     }
                     break;
                 case 3: //Up
-                    if(!lockWashing) StartCoroutine(StartWashing());
+                    //if(!lockWashing) StartCoroutine(StartWashing());
                     break;
                 case 4: //Down
                     if(trash.IsWashed() && currentPosition == trash.GetTypeIndex()){

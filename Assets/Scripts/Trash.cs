@@ -7,6 +7,7 @@ public class Trash : MonoBehaviour
 {
     public SpriteRenderer sinkTrash;
     public TextMeshProUGUI trashName;
+    public GameObject washingTxt;
 
     [SerializeField] [Space(10)] Sprite[] paper, plastic, glass, metal, generalWaste, wash;
 
@@ -57,7 +58,9 @@ public class Trash : MonoBehaviour
         sinkTrash.sprite = playerTrash.sprite;
         playerTrash.sprite = null;
 
-        yield return new WaitForSeconds(1f);
+        washingTxt.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        washingTxt.SetActive(false);
         
         spriteName = spriteName.Replace("dirty_","clean_");
 

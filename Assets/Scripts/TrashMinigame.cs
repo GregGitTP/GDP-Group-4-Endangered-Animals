@@ -85,7 +85,7 @@ public class TrashMinigame : MonoBehaviour {
     }
 
     public void ScoreWashed() {
-        score += 150;
+        score += 200;
     }
 
     public void ScoreNotWashed() {
