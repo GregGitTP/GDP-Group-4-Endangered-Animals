@@ -329,6 +329,14 @@ PrefabInstance:
       propertyPath: sceneID
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446119441936213577, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
+      propertyPath: neutralDialogue.Array.data[0]
+      value: I don't know if I can trust you yet.
+      objectReference: {fileID: 0}
     - target: {fileID: 6176343614672087587, guid: 6affb9bb95bee7d4eac6d2d8d3664664, type: 3}
       propertyPath: m_Controller
       value: 
