@@ -81,7 +81,9 @@ public class Interaction : MonoBehaviour {
             yield return null;
         }
         dialogueDisplay.SetActive(false);
-        StartCoroutine(levelLoader.GetComponent<LevelLoader>().LoadMinigame(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/TrashMinigame.unity")));
+        if (interactee.GetComponent<NPCDialogue>().loadLevel) {
+            StartCoroutine(levelLoader.GetComponent<LevelLoader>().LoadMinigame(interactee.GetComponent<NPCDialogue>().sceneID));
+        }
     }
 
     IEnumerator CheckForNextDialogue() {

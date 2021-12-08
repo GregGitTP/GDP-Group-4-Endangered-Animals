@@ -14,6 +14,8 @@ public class NPCDialogue : MonoBehaviour {
     public Sprite[] portraits;
     public int currentMode = 1;
     public int npcId = 0;
+    public bool loadLevel;
+    public int sceneID;
 
     private void Start() {
         if (PlayerPrefs.HasKey("moodOf" + npcId)) {

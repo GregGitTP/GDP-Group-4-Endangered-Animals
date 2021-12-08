@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
     public void UiButton(int id) {
         switch (id) {
-            case 1: //Play Button
+            case 0: //Play Button
                 SceneManager.LoadScene(1);
+                break;
+            case 1:
                 break;
             case 2:
                 break;
             case 3:
-                break;
-            case 4:
                 break;
         }
     }

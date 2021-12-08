@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
             moving = false;
         }
 
-        CameraFollow();
+        //CameraFollow();
         UpdateAnimation();
     }
 
