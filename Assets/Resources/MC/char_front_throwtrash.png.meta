@@ -1,28 +1,25 @@
 fileFormatVersion: 2
-guid: 2d2927892af8a6d4084c799875690f19
+guid: 769e5839354566d4eaab898041135bff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7784870833241029700
-    second: front-Sheet_0
+      213: -4622945704489711899
+    second: char_front_throwtrash_0
   - first:
-      213: 4801580174468390496
-    second: front-Sheet_1
+      213: -7674975267062791034
+    second: char_front_throwtrash_1
   - first:
-      213: 6846516079090967032
-    second: front-Sheet_2
+      213: -3960661198517481926
+    second: char_front_throwtrash_2
   - first:
-      213: -5112557604768359712
-    second: front-Sheet_3
+      213: 6563593693951909596
+    second: char_front_throwtrash_3
   - first:
-      213: -7925155834144246528
-    second: front-Sheet_4
+      213: -7626158363498331075
+    second: char_front_throwtrash_4
   - first:
-      213: -6048322927629326723
-    second: front-Sheet_5
-  - first:
-      213: -4613704130613850810
-    second: front-Sheet_6
+      213: -2023489927651527870
+    second: char_front_throwtrash_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,7 +86,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,19 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -124,11 +109,53 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: front-Sheet_0
+      name: char_front_throwtrash_0
       rect:
         serializedVersion: 2
         x: 2
-        y: 1
+        y: 2
+        width: 20
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e609fb006ff7dfb0800000000000000
+      internalID: -4622945704489711899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_front_throwtrash_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 3
+        width: 18
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68440da88a20d7590800000000000000
+      internalID: -7674975267062791034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: char_front_throwtrash_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 5
         width: 16
         height: 38
       alignment: 0
@@ -138,18 +165,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44c71add6ca690c60800000000000000
-      internalID: 7784870833241029700
+      spriteID: a3e41badf97e809c0800000000000000
+      internalID: -3960661198517481926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: front-Sheet_1
+      name: char_front_throwtrash_3
       rect:
         serializedVersion: 2
-        x: 23
-        y: 1
+        x: 76
+        y: 8
         width: 16
         height: 38
       alignment: 0
@@ -159,18 +186,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06e1fb39ab3a2a240800000000000000
-      internalID: 4801580174468390496
+      spriteID: cde5ff170b1961b50800000000000000
+      internalID: 6563593693951909596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: front-Sheet_2
+      name: char_front_throwtrash_4
       rect:
         serializedVersion: 2
-        x: 44
-        y: 1
+        x: 100
+        y: 7
         width: 16
         height: 38
       alignment: 0
@@ -180,39 +207,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f1a73b7916b30f50800000000000000
-      internalID: 6846516079090967032
+      spriteID: d34cece9f517a2690800000000000000
+      internalID: -7626158363498331075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: front-Sheet_3
+      name: char_front_throwtrash_5
       rect:
         serializedVersion: 2
-        x: 65
-        y: 0
-        width: 16
-        height: 39
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ea5f0a22fb8c09b0800000000000000
-      internalID: -5112557604768359712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: front-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 1
+        x: 124
+        y: 2
         width: 16
         height: 38
       alignment: 0
@@ -222,50 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 005b73412c0340290800000000000000
-      internalID: -7925155834144246528
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: front-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 107
-        y: 1
-        width: 16
-        height: 38
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d76adcbb75a001ca0800000000000000
-      internalID: -6048322927629326723
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: front-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 16
-        height: 39
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64d4204a984d8ffb0800000000000000
-      internalID: -4613704130613850810
+      spriteID: 243ffb7b1ae1be3e0800000000000000
+      internalID: -2023489927651527870
       vertices: []
       indices: 
       edges: []
