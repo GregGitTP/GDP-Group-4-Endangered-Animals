@@ -9,7 +9,7 @@ public class MinigameManager : MonoBehaviour {
     public MinigameState currentMinigameState = MinigameState.Idle;
     public static MinigameManager minigameManager;
     public TrashPlayerController trashPlayerController;
-    public GameObject countDown;
+    public GameObject countDown, tutortial;
     public TextMeshProUGUI startTxt;
     public int npcId = 0;
 
@@ -60,6 +60,7 @@ public class MinigameManager : MonoBehaviour {
             yield return new WaitForSecondsRealtime(1);
         }
         countDown.SetActive(false);
+        tutortial.SetActive(false);
         currentMinigameState = MinigameState.InGame;
         trashPlayerController.SetNewTrash();
     }
