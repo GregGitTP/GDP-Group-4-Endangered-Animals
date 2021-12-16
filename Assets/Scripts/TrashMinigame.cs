@@ -15,7 +15,7 @@ public class TrashMinigame : MonoBehaviour {
 
     private float timeLeft = 60;
     private int score = 0;
-    private int reqScore = 3000;
+    private int reqScore = 2000;
 
     private void Update() {
         if (MinigameManager.minigameManager.currentMinigameState == MinigameManager.MinigameState.InGame) {
