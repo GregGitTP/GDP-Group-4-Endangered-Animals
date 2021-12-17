@@ -64,6 +64,8 @@ public class Interaction : MonoBehaviour {
             GetComponent<PlayerController>().interacting = true;
             interactee.GetComponent<NPC>().interacting = true;
             interacting = true;
+            dialogueLine = 0;
+            dialogueUI.text = "";
             dialogueDisplay.SetActive(true); //Show the dialogue UI display
             dialogueName.GetComponent<TMP_Text>().text = interactee.GetComponent<NPC>().name;
             dialoguePortrait.GetComponent<Image>().sprite = interactee.GetComponent<NPCDialogue>().portraits[interactee.GetComponent<NPCDialogue>().currentMode]; //Set the portrait base on mode
@@ -83,6 +85,11 @@ public class Interaction : MonoBehaviour {
         dialogueDisplay.SetActive(false);
         if (interactee.GetComponent<NPCDialogue>().loadLevel) {
             StartCoroutine(levelLoader.GetComponent<LevelLoader>().LoadMinigame(interactee.GetComponent<NPCDialogue>().sceneID));
+        } else {
+            GetComponent<PlayerController>().interacting = false;
+            interactee.GetComponent<NPC>().interacting = false;
+            interacting = false;
+            dAnimating = false;
         }
     }
 
